@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        .container {
+            background-color: #ff00ae;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .container h2 {
+            margin-bottom: 20px;
+        }
+
+        .container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            border: none;
+            border-radius: 5px;
+            color: rgb(255, 255, 255);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .container button:hover {
+            background-color: #ffffff44;
+        }
+
+        .container .error {
+            color: rgb(253, 253, 253);
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="username" required>
+            
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="password" required>
+            
+            <button type="submit">Login</button>
+            <div class="error" id="login-error-message" style="display: none;">Invalid username or password</div>
+            <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+        </form>
+    </div>
+
+    <div class="container hidden" id="register-container">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="register-username">Username:</label>
+            <input type="text" id="register-username" name="username" required>
+            
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" name="password" required>
+            
+            <button type="submit">Register</button>
+            <div class="error" id="register-error-message" style="display: none;">Registration failed</div>
+            <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('show-register').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('register-container').classList.remove('hidden');
+        });
+
+        document.getElementById('show-login').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('register-container').classList.add('hidden');
+            document.getElementById('login-container').classList.remove('hidden');
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var username = document.getElementById('login-username').value;
+            var password = document.getElementById('login-password').value;
+
+            if (username === 'admin' && password === 'password') {
+                alert('Login successful!');
+                window.location.href = 'admin.html'; // Ganti dengan link halaman admin yang benar
+            } else {
+                document.getElementById('login-error-message').style.display = 'block';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var username = document.getElementById('register-username').value;
+            var password = document.getElementById('register-password').value;
+
+            if (username && password) {
+                alert('Registration successful!');
+                document.getElementById('register-container').classList.add('hidden');
+                document.getElementById('login-container').classList.remove('hidden');
+            } else {
+                document.getElementById('register-error-message').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
